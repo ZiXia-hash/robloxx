@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Kenangan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .add-memory-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .add-memory-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-input {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: 600;
+        }
+
+        .file-upload-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .preview-image, .preview-video {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #667eea;
+        }
+
+        .preview-item {
+            position: relative;
+        }
+
+        .video-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .memory-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+        }
+
+        .memory-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .memory-date {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .memory-description {
+            padding: 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .memory-photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .memory-photo, .memory-video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .memory-photo:hover, .memory-video:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-media-item {
+            position: relative;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            pointer-events: none;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 20px 20px;
+            font-weight: 600;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-video {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .memories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Kenangan Mount Roblox</h1>
+            <p>Ayo Kita Simpan Foto dan Video Setelah Main Roblox</p>
+        </header>
+
+        <div class="add-memory-section">
+            <h2>Tambah Kenangan Yang Baru</h2>
+            <form id="memoryForm">
+                <div class="form-group">
+                    <label for="activityName">Nama Mount atau Map</label>
+                    <input type="text" id="activityName" placeholder="Contoh: Mount Kotak" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Deskripsikan Mount Tersebut</label>
+                    <textarea id="description" placeholder="Ceritakan tentang mount ini"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Foto & Video</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="photoInput" class="file-upload-input" accept="image/*,video/*" multiple>
+                        <label for="photoInput" class="file-upload-label">
+                             Pilih Foto/Video (Ini Bisa lebih dari 1 yaaa)
+                        </label>
+                    </div>
+                    <div id="previewContainer" class="preview-container"></div>
+                </div>
+
+                <button type="submit" class="btn"> Simpan Kenangan</button>
+            </form>
+        </div>
+
+        <div id="memoriesContainer" class="memories-grid"></div>
+        <div id="emptyState" class="empty-state">
+            <h3>Belum ada kenangan tersimpan</h3>
+            <p>Mulai tambahkan kenangan pertama kita</p>
+        </div>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" class="modal-content" style="display:none;">
+        <video id="modalVideo" class="modal-video" controls style="display:none;"></video>
+    </div>
+
+    <script>
+        let memories = [];
+        let selectedFiles = [];
+
+        // Load memories from localStorage on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedMemories = localStorage.getItem('memories');
+            if (savedMemories) {
+                memories = JSON.parse(savedMemories);
+                displayMemories();
+            }
+        });
+
+        // Handle file selection
+        document.getElementById('photoInput').addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            selectedFiles = files;
+            
+            const previewContainer = document.getElementById('previewContainer');
+            previewContainer.innerHTML = '';
+            
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'preview-item';
+                    
+                    if (file.type.startsWith('image/')) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'preview-image';
+                        itemDiv.appendChild(img);
+                    } else if (file.type.startsWith('video/')) {
+                        const video = document.createElement('video');
+                        video.src = e.target.result;
+                        video.className = 'preview-video';
+                        itemDiv.appendChild(video);
+                        
+                        const badge = document.createElement('span');
+                        badge.className = 'video-badge';
+                        badge.textContent = '▶ VIDEO';
+                        itemDiv.appendChild(badge);
+                    }
+                    
+                    previewContainer.appendChild(itemDiv);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Handle form submission
+        document.getElementById('memoryForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const activityName = document.getElementById('activityName').value;
+            const description = document.getElementById('description').value;
+            
+            if (selectedFiles.length === 0) {
+                alert('Mohon pilih minimal 1 foto/video!');
+                return;
+            }
+
+            const media = [];
+            let processedFiles = 0;
+
+            selectedFiles.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    media.push({
+                        type: file.type.startsWith('image/') ? 'image' : 'video',
+                        data: e.target.result
+                    });
+                    processedFiles++;
+                    
+                    if (processedFiles === selectedFiles.length) {
+                        const memory = {
+                            id: Date.now(),
+                            activityName,
+                            description,
+                            media,
+                            date: new Date().toLocaleDateString('id-ID', { 
+                                day: 'numeric', 
+                                month: 'long', 
+                                year: 'numeric' 
+                            })
+                        };
+                        
+                        memories.unshift(memory);
+                        localStorage.setItem('memories', JSON.stringify(memories));
+                        displayMemories();
+                        
+                        // Reset form
+                        document.getElementById('memoryForm').reset();
+                        document.getElementById('previewContainer').innerHTML = '';
+                        selectedFiles = [];
+                        
+                        alert('Kenangan berhasil disimpan! 🎉');
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Display memories
+        function displayMemories() {
+            const container = document.getElementById('memoriesContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (memories.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            container.innerHTML = memories.map(memory => `
+                <div class="memory-card">
+                    <div class="memory-header">
+                        <h3>${memory.activityName}</h3>
+                        <p class="memory-date">${memory.date}</p>
+                    </div>
+                    ${memory.description ? `<div class="memory-description">${memory.description}</div>` : ''}
+                    <div class="memory-photos">
+                        ${memory.media.map((item, index) => {
+                            if (item.type === 'image') {
+                                return `<img src="${item.data}" class="memory-photo" onclick="openModal('${item.type}', '${item.data}')">`;
+                            } else {
+                                return `
+                                    <div class="memory-media-item">
+                                        <video src="${item.data}" class="memory-video" onclick="openModal('${item.type}', '${item.data}')"></video>
+                                        <div class="play-icon">▶</div>
+                                    </div>
+                                `;
+                            }
+                        }).join('')}
+                    </div>
+                    <button class="delete-btn" onclick="deleteMemory(${memory.id})">🗑️ Hapus</button>
+                </div>
+            `).join('');
+        }
+
+        // Delete memory
+        function deleteMemory(id) {
+            if (confirm('Yakin ingin menghapus kenangan ini?')) {
+                memories = memories.filter(m => m.id !== id);
+                localStorage.setItem('memories', JSON.stringify(memories));
+                displayMemories();
+            }
+        }
+
+        // Modal functionality
+        function openModal(type, src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            
+            modal.classList.add('active');
+            
+            if (type === 'image') {
+                modalImg.style.display = 'block';
+                modalVideo.style.display = 'none';
+                modalImg.src = src;
+                modalVideo.pause();
+            } else {
+                modalImg.style.display = 'none';
+                modalVideo.style.display = 'block';
+                modalVideo.src = src;
+                modalVideo.play();
+            }
+        }
+
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            const modal = document.getElementById('imageModal');
+            const modalVideo = document.getElementById('modalVideo');
+            modal.classList.remove('active');
+            modalVideo.pause();
+        });
+
+        document.getElementById('imageModal').addEventListener('click', (e) => {
+            if (e.target.id === 'imageModal') {
+                const modal = document.getElementById('imageModal');
+                const modalVideo = document.getElementById('modalVideo');
+                modal.classList.remove('active');
+                modalVideo.pause();
+            }
+        });
+    </script>
+</body>
+</html>
