@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Kenangan Kita - Website Kenangan</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Kenangan Kita</div>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#gallery">Galeri</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#quotes">Quotes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Kenangan Indah Kita</h1>
+            <p class="hero-subtitle">Setiap momen adalah cerita yang tak terlupakan</p>
+            <button class="hero-btn" onclick="document.getElementById('gallery').scrollIntoView({behavior: 'smooth'})">
+                Lihat Kenangan
+            </button>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Galeri Kenangan</h2>
+            <p class="section-subtitle">Koleksi momen-momen berharga yang tersimpan</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-index="0">
+                    <div class="gallery-image">
+                        <div class="placeholder-image">
+                            <span>📸</span>
+                            <p>Kenangan 1</p>
+                        </div>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Momen Spesial</h3>
+                        <p>Kenangan yang tak terlupakan</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-index="1">
+                    <div class="gallery-image">
+                        <div class="placeholder-image">
+                            <span>🌟</span>
+                            <p>Kenangan 2</p>
+                        </div>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Hari Bahagia</h3>
+                        <p>Senyuman yang selalu dikenang</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-index="2">
+                    <div class="gallery-image">
+                        <div class="placeholder-image">
+                            <span>💫</span>
+                            <p>Kenangan 3</p>
+                        </div>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Petualangan</h3>
+                        <p>Jejak langkah bersama</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-index="3">
+                    <div class="gallery-image">
+                        <div class="placeholder-image">
+                            <span>🎉</span>
+                            <p>Kenangan 4</p>
+                        </div>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Perayaan</h3>
+                        <p>Kegembiraan yang dibagikan</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-index="4">
+                    <div class="gallery-image">
+                        <div class="placeholder-image">
+                            <span>🌈</span>
+                            <p>Kenangan 5</p>
+                        </div>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Kebersamaan</h3>
+                        <p>Waktu yang berkualitas</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-index="5">
+                    <div class="gallery-image">
+                        <div class="placeholder-image">
+                            <span>❤️</span>
+                            <p>Kenangan 6</p>
+                        </div>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Kasih Sayang</h3>
+                        <p>Cinta yang abadi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Timeline Kenangan</h2>
+            <p class="section-subtitle">Perjalanan waktu yang penuh makna</p>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020</div>
+                        <h3>Awal Pertemuan</h3>
+                        <p>Saat pertama kali kita bertemu, semuanya terasa berbeda. Momen yang mengubah segalanya.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021</div>
+                        <h3>Petualangan Pertama</h3>
+                        <p>Perjalanan pertama kita bersama, menciptakan kenangan yang tak terlupakan.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <h3>Momen Spesial</h3>
+                        <p>Hari yang penuh kebahagiaan, tertawa, dan kehangatan bersama.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023</div>
+                        <h3>Pencapaian Bersama</h3>
+                        <p>Merayakan kesuksesan dan mendukung satu sama lain dalam setiap langkah.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
+                        <h3>Hingga Kini</h3>
+                        <p>Perjalanan terus berlanjut, menciptakan lebih banyak kenangan indah setiap hari.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section id="quotes" class="quotes-section">
+        <div class="container">
+            <h2 class="section-title">Kata-Kata Indah</h2>
+            <div class="quotes-container">
+                <div class="quote-card active">
+                    <div class="quote-icon">"</div>
+                    <p class="quote-text">Kenangan adalah harta karun yang tidak akan pernah hilang, tersimpan abadi di dalam hati.</p>
+                    <div class="quote-author">- Anonymous</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-icon">"</div>
+                    <p class="quote-text">Setiap momen bersama adalah halaman berharga dalam buku cerita hidup kita.</p>
+                    <div class="quote-author">- Anonymous</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-icon">"</div>
+                    <p class="quote-text">Waktu mungkin berlalu, tapi kenangan indah akan selalu tinggal.</p>
+                    <div class="quote-author">- Anonymous</div>
+                </div>
+            </div>
+            <div class="quote-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Kenangan Kita. Dibuat dengan ❤️</p>
+            <p class="footer-subtitle">Setiap kenangan adalah cerita yang berharga</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Gallery -->
+    <div id="modal" class="modal">
+        <span class="modal-close">&times;</span>
+        <div class="modal-content-wrapper">
+            <button class="modal-nav prev">❮</button>
+            <div class="modal-content">
+                <div class="modal-image"></div>
+                <div class="modal-caption"></div>
+            </div>
+            <button class="modal-nav next">❯</button>
+        </div>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+</body>
+
+</html>
